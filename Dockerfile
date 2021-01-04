@@ -1,24 +1,23 @@
-# Use the official lightweight Node.js 12 image.
-# https://hub.docker.com/_/node
+# Pull in the official lightweight version of Node 12.
 FROM node:12-slim
 
 # Create and change to the app directory.
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy application dependency manifests to the container image.
-# A wildcard is used to ensure both package.json AND package-lock.json are copied.
-# Copying this separately prevents re-running npm install on every code change.
-COPY package.json yarn.lock ./
+COPY package.json .
+COPY yarn.lock .
 
 # Install production dependencies.
-RUN yarn install --frozen-lockfile --production
+RUN yarn install
 
-# Copy local code to the container image.
-COPY . ./
+# Copy local codebase into the container image
+COPY . .
 
+# Compile down to ES5 with Babel
 RUN yarn build
 
-RUN rm -rf src
+# Remove unused src directory
+RUN rm -rf src/
 
-# Run the web service on container startup.
-CMD [ "npm", "start" ]
+# Start the api server
+CMD [ "yarn", "start" ]

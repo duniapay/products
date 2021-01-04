@@ -4,4 +4,7 @@ coverage
 jest.config.js
 test
 bin
-
+!src/
+!package.json
+!yarn.lock
+!.yarnrc
