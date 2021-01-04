@@ -1,8 +1,10 @@
 import jsonfile from 'jsonfile';
 import { IUser } from '@entities/User';
+import { ITransaction } from '@entities/Transactions';
 
 interface IDatabase {
   users: IUser[];
+  transactions: ITransaction[];
 }
 
 class MockDaoMock {

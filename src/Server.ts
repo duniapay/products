@@ -1,10 +1,16 @@
+require('dotenv').config()
+
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import helmet from 'helmet';
 const Tracing = require("@sentry/tracing");
+const {Firestore} = require('@google-cloud/firestore');
+
+// Create a new client
 import * as Sentry from "@sentry/node";
 
 import express, { NextFunction, Request, Response } from 'express';
+const basicAuth = require('express-basic-auth')
 
 import StatusCodes from 'http-status-codes';
 
@@ -14,6 +20,8 @@ import BaseRouter from './routes';
 import logger from '@shared/Logger';
 
 const app = express();
+const firestore = new Firestore();
+
 
 Sentry.init({
   dsn: process.env.SENTRY,
@@ -73,6 +81,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     error: err.message,
   });
 });
+
 
 // Export express instance
 export default app;

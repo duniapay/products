@@ -15,52 +15,57 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable @typescript-eslint/no-misused-promises */
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const express_1 = require("express");
-const UserDao_mock_1 = __importDefault(require("@daos/User/UserDao.mock"));
-const constants_1 = require("@shared/constants");
+const UserDao_1 = __importDefault(require("@daos/User/UserDao"));
+var jwt = require('express-jwt');
+var jwks = require('jwks-rsa');
+const querystring = require('querystring');
 const router = express_1.Router();
-const userDao = new UserDao_mock_1.default();
+const userDao = new UserDao_1.default();
 const { BAD_REQUEST, CREATED, OK } = http_status_codes_1.default;
+var isAuthenticated = jwt({
+    secret: jwks.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: 'https://dev-1f5g1j38.eu.auth0.com/.well-known/jwks.json'
+    }),
+    audience: 'https://api.duniapay.net/',
+    issuer: 'https://dev-1f5g1j38.eu.auth0.com/',
+    algorithms: ['RS256']
+});
 /******************************************************************************
  *                      Get All Users - "GET /api/users/all"
  ******************************************************************************/
-router.get('/all', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield userDao.getAll();
-    return res.status(OK).json({ users });
-}));
-/******************************************************************************
- *                       Add One - "POST /api/users/add"
- ******************************************************************************/
-router.post('/add', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { user } = req.body;
-    if (!user) {
-        return res.status(BAD_REQUEST).json({
-            error: constants_1.paramMissingError,
+router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // const {client_id, client_secret} = req.body
+    var parsed = querystring.parse(req.url);
+    console.log(parsed);
+    if (parsed['/?secret'] !== process.env.CUSTOMER_SECRET) {
+        res.status(404).send({
+            status: 'Unauthorized',
+            message: "Missing or invalid API Key. Contact Support !"
         });
     }
-    yield userDao.add(user);
-    return res.status(CREATED).end();
-}));
-/******************************************************************************
- *                       Update - "PUT /api/users/update"
- ******************************************************************************/
-router.put('/update', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { user } = req.body;
-    if (!user) {
-        return res.status(BAD_REQUEST).json({
-            error: constants_1.paramMissingError,
-        });
+    else {
+        var client_secret = process.env.OAUTH_CLIENTSECRET;
+        var client_id = process.env.OAUTH_CLIENTID;
+        const token = yield userDao.auth({ client_id: client_id, client_secret: client_secret });
+        return res.status(OK).json(token);
     }
-    user.id = Number(user.id);
-    yield userDao.update(user);
-    return res.status(OK).end();
 }));
 /******************************************************************************
- *                    Delete - "DELETE /api/users/delete/:id"
+ *                      Get All Users - "GET /api/users/all"
  ******************************************************************************/
-router.delete('/delete/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    yield userDao.delete(Number(id));
-    return res.status(OK).end();
+router.post('/', isAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield userDao.add(req.body);
+    return res.status(OK).json({ user });
+}));
+/******************************************************************************
+ *                      Get All Users - "GET /api/users/all"
+ ******************************************************************************/
+router.get('/:userId', isAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield userDao.getOne(req.params.userId);
+    return res.status(OK).json({ user });
 }));
 /******************************************************************************
  *                                     Export

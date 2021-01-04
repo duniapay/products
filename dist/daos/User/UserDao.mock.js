@@ -12,7 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require('dotenv').config();
 const functions_1 = require("@shared/functions");
+const fetch = require('node-fetch');
 const MockDao_mock_1 = __importDefault(require("../MockDb/MockDao.mock"));
 class UserDao extends MockDao_mock_1.default {
     getOne(email) {
@@ -48,6 +50,26 @@ class UserDao extends MockDao_mock_1.default {
             user.id = functions_1.getRandomInt();
             db.users.push(user);
             yield _super.saveDb.call(this, db);
+        });
+    }
+    auth(credentials) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const jsonBody = { client_id: credentials.client_id, client_secret: credentials.client_secret, audience: process.env.OAUTH_AUDIENCE, grant_type: process.env.OAUTH_GRANT_TYPE };
+            let requestConfig = {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(jsonBody)
+            };
+            let response;
+            yield fetch(process.env.OAUTH_ENDPOINT, requestConfig)
+                .then((res) => res.json())
+                .then((_json) => {
+                response = _json;
+            })
+                .catch((err) => {
+                throw err;
+            });
+            return response;
         });
     }
     update(user) {
