@@ -4,6 +4,7 @@ networks:
     external: true
 services:
   productsapi:
+    restart: always
     networks:
       - products_api_default
     build:

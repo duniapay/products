@@ -20,15 +20,18 @@ RUN ls -a
 # RUN npm ci --only=production
 RUN npm install --production
 
+RUN npm install pm2 -g
+
 RUN npm fund
 
-# Copy all other source code to work directory
-ADD . /usr/src/app
 # TypeScript
 RUN npm run build
 
-# Start
-CMD [ "npm", "start" ]
+COPY ./dist .
 
 EXPOSE 8080
+
+# Start
+CMD ["pm2-runtime","index.js"]
+
 
