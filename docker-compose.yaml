@@ -1,16 +1,17 @@
 version: "3"
-networks:
-  products_api_default:
-    external: true
 services:
-  productsapi:
+  app:
+    container_name: products_api
     restart: always
-    networks:
-      - products_api_default
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     environment:
-      ENV_NAME: dev
+      - PORT=8080
     ports:
-      - 8080:8080
+      - "4000:4000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
