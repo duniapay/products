@@ -70,7 +70,7 @@
     "deploy:app": "./bin/deploy.sh",
     "build:dev": "ts-node build.ts",
     "start": "node -r module-alias/register ./dist --env=production",
-    "build": "tsc -p .",
+    "build": "tsc",
     "prettier-format": "run-script-os",
     "prettier-format:win32": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
     "prettier-format:darwin:linux": "prettier --config .prettierrc 'src/**/*.ts' --write",

@@ -8,3 +8,5 @@ bin
 !package.json
 !yarn.lock
 !.yarnrc
+node_modules
+npm-debug.log

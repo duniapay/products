@@ -5,5 +5,5 @@ RUN npm install
 RUN npm install pm2 -g
 RUN npm run build
 COPY ./dist .
-EXPOSE 4000
+EXPOSE 8080
 CMD ["pm2-runtime","index.js"]
