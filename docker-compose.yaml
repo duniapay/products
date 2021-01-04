@@ -1,0 +1,15 @@
+version: "3"
+networks:
+  products_api_default:
+    external: true
+services:
+  productsapi:
+    networks:
+      - products_api_default
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      ENV_NAME: dev
+    ports:
+      - 8080:8080

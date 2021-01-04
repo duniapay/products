@@ -1,23 +1,34 @@
-# Pull in the official lightweight version of Node 12.
+# Use the official lightweight Node.js 12 image.
+# https://hub.docker.com/_/node
 FROM node:12-slim
 
+ENV ENV_NAME dev
+
 # Create and change to the app directory.
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json .
-COPY yarn.lock .
+# Copy application dependency manifests to the container image.
+# A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# Copying this separately prevents re-running npm install on every code change.
+COPY package*.json ./
+COPY tsconfig.json ./
 
-# Install production dependencies.
-RUN yarn install
+# check files list
+RUN ls -a
+# Install dependencies.
+# If you add a package-lock.json speed your build by switching to 'npm ci'.
+# RUN npm ci --only=production
+RUN npm install --production
 
-# Copy local codebase into the container image
-COPY . .
+RUN npm fund
 
-# Compile down to ES5 with Babel
-RUN yarn build
+# Copy all other source code to work directory
+ADD . /usr/src/app
+# TypeScript
+RUN npm run build
 
-# Remove unused src directory
-RUN rm -rf src/
+# Start
+CMD [ "npm", "start" ]
 
-# Start the api server
-CMD [ "yarn", "start" ]
+EXPOSE 8080
+
