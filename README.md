@@ -1,46 +1,116 @@
-# 🧰 Serverless Microservice Starter | Cloud Run
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+</p>
 
-> You'll need to setup a GCP project that has access to Google Cloud Run. You should create a service account that has the following roles: `Cloud Run Admin` and `Service Account User`.
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
+  
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-> You'll also need to create a private key for the service account (it should download a JSON file). You'll want to run `base64 <path/to/json>` and set it as the `GOOGLE_APPLICATION_CREDENTIALS` secret in GitHub.
+## Description
 
-### Setup
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-- Minimal
-- TypeScript v4
-- Testing with Jest
-- Linting with Eslint and Prettier
-- Pre-commit hooks with Husky
-- VS Code debugger scripts
-- Local development with Nodemon
+## Installation
 
-### Scripts
+```bash
+$ npm install
+```
 
-#### `npm run start:dev`
+## Running the app
 
-Starts the application in development using `nodemon` and `ts-node` to do hot reloading.
+```bash
+# development
+$ npm run start
 
-#### `npm run start`
+# watch mode
+$ npm run start:dev
 
-Starts the app in production by first building the project with `npm run build`, and then executing the compiled JavaScript at `build/index.js`.
+# production mode
+$ npm run start:prod
+```
+Ensure also that [Docker is installed](https://docs.docker.com/engine/install) on your work station
 
-#### `npm run build`
+## Setting up the app for use with Docker
+1. Add Dockerfile
+2. Add docker-compose.yml
+3. Add unnecessary files to .gitignore
+4. Add .dockerignore and include the unnecessary files
+5. Add nodemon-docker-debug.json
+6. Add ```"debug": "nodemon -L --config nodemon-docker-debug.json"``` script to package.json
+7. Configure VS Code for [debugging the node js app with a container](https://code.visualstudio.com/docs/containers/debug-node)
 
-Builds the app at `build`, cleaning the folder first.
 
-#### `npm run test`
+## Running the app with Docker
+```sh
+# Build the image
+$ docker build -t docker-nest-js:v1.0 .
 
-Runs the `jest` tests once.
+# Run the image interactively
+$ docker run -it -p 3000:3000 docker-nest-js:v1.0
+```
 
-#### `npm run test:dev`
 
-Run the `jest` tests in watch mode, waiting for file changes.
+## Using Docker Compose
+```sh
+# Build the docker image
+$ docker-compose build
 
-#### `npm run prettier-format`
+# Start and login to the container
+$ docker-compose up -d
+$ docker-compose exec app sh
+```
 
-Format your code.
+## Other useful Docker commands
+```sh
+# Get the container ID
+$ docker ps
 
-#### `npm run prettier-watch`
+# View logs
+$ docker logs <container id>
 
-Format your code in watch mode, waiting for file changes.
+# Enter the container (In alpine, use sh because bash is not installed by default)
+$ docker exec -it <container id> /bin/sh
+```
 
+## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
+
+## Support
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
