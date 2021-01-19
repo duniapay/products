@@ -69,7 +69,7 @@
     "deploy": "yarn build && (yarn deploy:app)",
     "deploy:app": "./bin/deploy.sh",
     "build:dev": "ts-node build.ts",
-    "start": "node -r module-alias/register ./dist --env=production",
+    "start": "tsc && node ./build/src/index.js --env=production",
     "build": "tsc",
     "prettier-format": "run-script-os",
     "prettier-format:win32": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
