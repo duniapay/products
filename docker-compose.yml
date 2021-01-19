@@ -1,0 +1,36 @@
+version: "3.6"
+services:
+  mongo:
+    container_name: dunia-mongo
+    image: mongo:4.2
+    command: --replSet dunia-rs --bind_ip_all
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    networks:
+      - dunia
+    ports:
+      - 27017:27017
+  
+  api:
+    container_name: customer-api
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks:
+      - dunia
+    environment:
+      APP_ENV: production
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+
+networks:
+  dunia:
+    name: dunia-network
+
+volumes:
+  mongodb:
