@@ -16,7 +16,6 @@ var twilio = require('twilio');
 let AppService = class AppService {
     constructor(configService) {
         this.configService = configService;
-        this.client = new twilio(process.env.TWILLIO_ACCOUNT_SID, process.env.TWILLIO_TOKEN);
     }
     port() {
         return this.configService.get('PORT');

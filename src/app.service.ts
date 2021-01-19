@@ -13,7 +13,6 @@ export class AppService {
  
   private client: any;
   constructor(private configService: ConfigService) {
-    this.client = new twilio(process.env.TWILLIO_ACCOUNT_SID, process.env.TWILLIO_TOKEN);
   }
 
   port(): string {
