@@ -2872,8 +2872,8 @@
         "affectsGlobalScope": false
       },
       "../src/app.controller.ts": {
-        "version": "3ba68bb7852d840d6c5126c01ea870a8f60e51130926d876ba678e575d7cdea0",
-        "signature": "07bc5b7419126446a6f4c912fc769e3f5f2b78b1fd91d5fc7669d3cb3d27df97",
+        "version": "070638495b71ba9743c05c527a7a755c8bacc8044883c6bc52ce6748f5f1827d",
+        "signature": "a4a835fb103f6d6a39da5b1b9fd30c490c484ea567d28a54bc0930231e948754",
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjs/serve-static/dist/interfaces/serve-static-options.interface.d.ts": {
@@ -3131,9 +3131,14 @@
         "signature": "1d2254ab5fdfd1f346a6e8d03ec698954dd330fdafc2942b77366a052571eab7",
         "affectsGlobalScope": false
       },
+      "../node_modules/@nestjs/config/dist/utils/get-config-token.util.d.ts": {
+        "version": "aadc9a99a877b842474c622500d983eb1927f6ca27374f1b94e561bef54e5997",
+        "signature": "aadc9a99a877b842474c622500d983eb1927f6ca27374f1b94e561bef54e5997",
+        "affectsGlobalScope": false
+      },
       "../node_modules/@nestjs/config/dist/utils/index.d.ts": {
-        "version": "3ced8d48c62c5f6ecdba0e8e745156fc991a81d042a7639b713d615e5b2fe4a6",
-        "signature": "3ced8d48c62c5f6ecdba0e8e745156fc991a81d042a7639b713d615e5b2fe4a6",
+        "version": "f9e034b1ae29825c00532e08ea852b0c72885c343ee48d2975db0a6481218ab3",
+        "signature": "f9e034b1ae29825c00532e08ea852b0c72885c343ee48d2975db0a6481218ab3",
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjs/config/dist/index.d.ts": {
@@ -3162,8 +3167,8 @@
         "affectsGlobalScope": false
       },
       "../src/user/user.service.ts": {
-        "version": "fc28a82807b9d76b7430239c75662f384f75790094e4117f78fa82c8c01c729c",
-        "signature": "d435872b05bbd03cb8c38ccd9c4d2bf5cd804af6998aad64b951276156000ba3",
+        "version": "60371c019e9dba890e7aa34f7f050a74219ac9243489b373980e339894746f8a",
+        "signature": "5011895a1abbb514a96a28dd6604f2952471945e04271e7098b81e76ffe3d535",
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjs/passport/dist/abstract.strategy.d.ts": {
@@ -3227,13 +3232,13 @@
         "affectsGlobalScope": false
       },
       "../src/transactions/transactions.interfaces.ts": {
-        "version": "d5a3b34e2bf0f9b53fd50c04334cc53baed32554b6cdb658fa2d46fb45aa4053",
-        "signature": "ce56c383c2c9d7a80d40286322190112f4f1d29ee8cc9fa14706a497605b1cdd",
+        "version": "3daf4756f709c26301ea50f5b055ce8d5c9a7ce5008802b20b13fc06a83bed1d",
+        "signature": "79c06eed97313baf92c8e7ee09fc69283a26309b82ffa2b755f1094537b5e8ad",
         "affectsGlobalScope": false
       },
       "../src/transactions/transactions.service.ts": {
-        "version": "a725480616c412008a9648cde78ed20e030e3b196e57754dd29bcdb73a539c44",
-        "signature": "4715574dce6c2948c205ce1841df7858393db26e876c68f8b8ce9ceb3b493631",
+        "version": "b012735933cbc66e9c1ddab6454a83c3311f329ea05be5aeb01f393241ea2125",
+        "signature": "6a555c1ef74cd6bc72fe05726061edfde6818bb3bbcfae07e12a898ad7fe8f2b",
         "affectsGlobalScope": false
       },
       "../src/transactions/transactions.controller.ts": {
@@ -3279,6 +3284,11 @@
       "../src/app.module.ts": {
         "version": "d3044cb94f56c2a11d01fd467c7f4efa7a02409c36cc532de26e8f6ce8b2e624",
         "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644",
+        "affectsGlobalScope": false
+      },
+      "../src/app.service 2.ts": {
+        "version": "2f64d323e2c27a63ea67c0fa10a5f99b5c1c3dbc4f89a7cae66796fee9e2565f",
+        "signature": "9f9d5441bd9b8078dec9273048efa81aa9a145e7b6204dda13852e00864ae625",
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjs/platform-express/interfaces/serve-static-options.interface.d.ts": {
@@ -3661,9 +3671,24 @@
         "signature": "8d5af6172de9f560d164da95ec7dd7238647230d43577aa6b487fc579e0debd7",
         "affectsGlobalScope": false
       },
+      "../src/main 2.ts": {
+        "version": "ac6996e38eb1d1cb647273d64b722217130ed2e791cb7494a607713a9b7b3b13",
+        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "affectsGlobalScope": false
+      },
       "../src/main.ts": {
         "version": "ac6996e38eb1d1cb647273d64b722217130ed2e791cb7494a607713a9b7b3b13",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "affectsGlobalScope": false
+      },
+      "../src/authz/authz.module 2.ts": {
+        "version": "624b452aeb4f4c462cc18daf234f06d6f37352a7e486ef778eb4bb1f10f1fd00",
+        "signature": "1d6bf1ce618d29ae26d955cd37c95affd146d2034b5397c387094cec5751a36d",
+        "affectsGlobalScope": false
+      },
+      "../src/authz/jwt.strategy 2.ts": {
+        "version": "54248807ad879b2e9b5f91b8d93418e7a6e4dd7bb418517a33c15211ed3bae28",
+        "signature": "9abd15c5103dd4169a1a2457e26abaedd0a0797ae4812c6000320e26b9d1fcc1",
         "affectsGlobalScope": false
       },
       "../src/core/cache.interceptor.ts": {
@@ -3684,6 +3709,16 @@
       "../src/core/timeout.interceptor.ts": {
         "version": "c2d1ed13e70459d3a28568a14ea11d989cab7e21fc4baab06068f5ec5670b85e",
         "signature": "d7027069812690ef3d522474471f86a316d44755ebb6e785c5cd2c31b79ed56a",
+        "affectsGlobalScope": false
+      },
+      "../src/transactions/transactions.service.mock.ts": {
+        "version": "aaf2b0c39ae7efb7416515871a2976fd6a17d2822d482d0624331dc46ebdd8d6",
+        "signature": "b3fd3dabf7691242b9593008ca712dd5886d3b5253c9a94356b84f203d91a918",
+        "affectsGlobalScope": false
+      },
+      "../src/user/user.service.mock.ts": {
+        "version": "ad6b905fa1cb12a290077d25f80ef7a49e207b854509968180e5ffba10f39968",
+        "signature": "cf62768ed9215b297509b665f9b15dfb19745ec0180abc98efe854639f8361b7",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/anymatch/index.d.ts": {
@@ -3732,13 +3767,13 @@
         "affectsGlobalScope": true
       },
       "../node_modules/@types/json-schema/index.d.ts": {
-        "version": "b2be568d8ce95fcb26eebd04c035d94825655fdf689bf67d799f5ff8cbbb1024",
-        "signature": "b2be568d8ce95fcb26eebd04c035d94825655fdf689bf67d799f5ff8cbbb1024",
+        "version": "3a1e165b22a1cb8df82c44c9a09502fd2b33f160cd277de2cd3a055d8e5c6b27",
+        "signature": "3a1e165b22a1cb8df82c44c9a09502fd2b33f160cd277de2cd3a055d8e5c6b27",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/estree/index.d.ts": {
-        "version": "6a38e250306ceccbab257d11b846d5bd12491157d20901fa01afe4050c93c1b5",
-        "signature": "6a38e250306ceccbab257d11b846d5bd12491157d20901fa01afe4050c93c1b5",
+        "version": "745a853d60bf782583a58584f59e202cae5c7a898b0c92696442602a3ef17a87",
+        "signature": "745a853d60bf782583a58584f59e202cae5c7a898b0c92696442602a3ef17a87",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/eslint/index.d.ts": {
@@ -4464,6 +4499,7 @@
         "../node_modules/@nestjs/config/dist/types/no-infer.type.d.ts"
       ],
       "../node_modules/@nestjs/config/dist/utils/index.d.ts": [
+        "../node_modules/@nestjs/config/dist/utils/get-config-token.util.d.ts",
         "../node_modules/@nestjs/config/dist/utils/register-as.util.d.ts"
       ],
       "../node_modules/@nestjs/config/dist/utils/register-as.util.d.ts": [
@@ -6824,6 +6860,14 @@
         "../src/user/user.controller.ts",
         "../src/user/user.service.ts"
       ],
+      "../src/app.service 2.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/config/dist/config.service.d.ts",
+        "../node_modules/gaxios/build/src/index.d.ts",
+        "../src/core/AuthorizeMfaDto.ts",
+        "../src/core/VerifyMfaDto.ts",
+        "../src/core/transaction.dto.ts"
+      ],
       "../src/app.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/config/dist/config.service.d.ts",
@@ -6832,10 +6876,21 @@
         "../src/core/VerifyMfaDto.ts",
         "../src/core/transaction.dto.ts"
       ],
+      "../src/authz/authz.module 2.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/passport/index.d.ts",
+        "../src/authz/jwt.strategy.ts"
+      ],
       "../src/authz/authz.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts",
         "../src/authz/jwt.strategy.ts"
+      ],
+      "../src/authz/jwt.strategy 2.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/passport/index.d.ts",
+        "../node_modules/dotenv/types/index.d.ts",
+        "../node_modules/jwks-rsa/index.d.ts"
       ],
       "../src/authz/jwt.strategy.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
@@ -6871,6 +6926,16 @@
       "../src/core/transaction.dto.ts": [
         "../node_modules/class-validator/types/index.d.ts"
       ],
+      "../src/main 2.ts": [
+        "../node_modules/@nestjs/common/pipes/index.d.ts",
+        "../node_modules/@nestjs/config/dist/config.service.d.ts",
+        "../node_modules/@nestjs/core/index.d.ts",
+        "../node_modules/@nestjs/platform-express/index.d.ts",
+        "../node_modules/@sentry/node/dist/index.d.ts",
+        "../node_modules/@types/node/path.d.ts",
+        "../node_modules/helmet/dist/index.d.ts",
+        "../src/app.module.ts"
+      ],
       "../src/main.ts": [
         "../node_modules/@nestjs/common/pipes/index.d.ts",
         "../node_modules/@nestjs/config/dist/config.service.d.ts",
@@ -6892,8 +6957,14 @@
       "../src/transactions/transactions.interfaces.ts": [
         "../src/transactions/transactions.entity.ts"
       ],
+      "../src/transactions/transactions.service.mock.ts": [
+        "../src/transactions/transactions.entity.ts",
+        "../src/transactions/transactions.interfaces.ts"
+      ],
       "../src/transactions/transactions.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/config/index.d.ts",
+        "../src/core/transaction.dto.ts",
         "../src/transactions/export.interfaces.ts",
         "../src/transactions/transactions.entity.ts",
         "../src/transactions/transactions.interfaces.ts"
@@ -6910,8 +6981,13 @@
       "../src/user/user.interfaces.ts": [
         "../src/user/user.entity.ts"
       ],
+      "../src/user/user.service.mock.ts": [
+        "../src/user/user.entity.ts",
+        "../src/user/user.interfaces.ts"
+      ],
       "../src/user/user.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/config/index.d.ts",
         "../src/transactions/transactions.entity.ts",
         "../src/user/user.entity.ts",
         "../src/user/user.interfaces.ts"
@@ -7406,6 +7482,7 @@
         "../node_modules/@nestjs/config/dist/types/no-infer.type.d.ts"
       ],
       "../node_modules/@nestjs/config/dist/utils/index.d.ts": [
+        "../node_modules/@nestjs/config/dist/utils/get-config-token.util.d.ts",
         "../node_modules/@nestjs/config/dist/utils/register-as.util.d.ts"
       ],
       "../node_modules/@nestjs/config/dist/utils/register-as.util.d.ts": [
@@ -9744,7 +9821,13 @@
         "../node_modules/rxjs/internal/operators/zipAll.d.ts"
       ],
       "../src/app.controller.ts": [
-        "../src/app.service.ts"
+        "../src/app.service.ts",
+        "../src/core/AuthorizeMfaDto.ts",
+        "../src/core/VerifyMfaDto.ts",
+        "../src/core/transaction.dto.ts"
+      ],
+      "../src/app.service 2.ts": [
+        "../node_modules/@nestjs/config/dist/config.service.d.ts"
       ],
       "../src/app.service.ts": [
         "../node_modules/@nestjs/config/dist/config.service.d.ts"
@@ -9777,8 +9860,12 @@
       "../src/transactions/transactions.interfaces.ts": [
         "../src/transactions/transactions.entity.ts"
       ],
+      "../src/transactions/transactions.service.mock.ts": [
+        "../src/transactions/transactions.entity.ts",
+        "../src/transactions/transactions.interfaces.ts"
+      ],
       "../src/transactions/transactions.service.ts": [
-        "../src/transactions/export.interfaces.ts",
+        "../node_modules/@nestjs/config/index.d.ts",
         "../src/transactions/transactions.entity.ts",
         "../src/transactions/transactions.interfaces.ts"
       ],
@@ -9789,7 +9876,12 @@
       "../src/user/user.interfaces.ts": [
         "../src/user/user.entity.ts"
       ],
+      "../src/user/user.service.mock.ts": [
+        "../src/user/user.entity.ts",
+        "../src/user/user.interfaces.ts"
+      ],
       "../src/user/user.service.ts": [
+        "../node_modules/@nestjs/config/index.d.ts",
         "../src/user/user.entity.ts",
         "../src/user/user.interfaces.ts"
       ]

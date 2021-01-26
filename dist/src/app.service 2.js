@@ -9,37 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
+exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
-const config_1 = require("@nestjs/config");
-const transactions_entity_1 = require("../transactions/transactions.entity");
-let UserService = class UserService {
+const config_service_1 = require("@nestjs/config/dist/config.service");
+var twilio = require('twilio');
+let AppService = class AppService {
     constructor(configService) {
         this.configService = configService;
-        this.users = [];
-    }
-    async getOne(email) {
-        return null;
-    }
-    async auth(credentials) {
-        return null;
-    }
-    async add(user) {
-        return null;
-    }
-    async update(user) {
-        return null;
-    }
-    async delete(id) {
-        return null;
     }
     port() {
         return this.configService.get('PORT');
     }
 };
-UserService = __decorate([
+AppService = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [config_1.ConfigService])
-], UserService);
-exports.UserService = UserService;
-//# sourceMappingURL=user.service.js.map
+    __metadata("design:paramtypes", [config_service_1.ConfigService])
+], AppService);
+exports.AppService = AppService;
+//# sourceMappingURL=app.service%202.js.map

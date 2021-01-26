@@ -17,6 +17,18 @@ let AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
     }
+    debit(validCollectDTO) {
+        throw new Error('Method not implemented.');
+    }
+    airtime(validAirtimeDTO) {
+        throw new Error('Method not implemented.');
+    }
+    authorize(validAuthorizeMfaDto) {
+        throw new Error('Method not implemented.');
+    }
+    verifiy(validVerifyMfaDto) {
+        throw new Error('Method not implemented.');
+    }
 };
 AppController = __decorate([
     common_1.UseInterceptors(sentry_interceptor_1.SentryInterceptor),

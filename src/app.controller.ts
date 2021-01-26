@@ -9,6 +9,18 @@ import { Response } from 'express';
 @UseInterceptors(SentryInterceptor)
 @Controller()
 export class AppController {
+  debit(validCollectDTO: TransactionDTO): any {
+    throw new Error('Method not implemented.');
+  }
+  airtime(validAirtimeDTO: TransactionDTO): any {
+    throw new Error('Method not implemented.');
+  }
+  authorize(validAuthorizeMfaDto: AuthorizeMfaDto): any {
+    throw new Error('Method not implemented.');
+  }
+  verifiy(validVerifyMfaDto: VerifyMfaDto): any {
+    throw new Error('Method not implemented.');
+  }
   constructor(private readonly appService: AppService) {}
 
  
