@@ -5,26 +5,21 @@ import { IExportResponse } from './export.interfaces';
 import { ITransaction } from './transactions.entity';
 import { ITransactionDao } from './transactions.interfaces';
 
-
-
-
 @Injectable()
 export class TransactionsService implements ITransactionDao {
     private readonly cats: TransactionDTO[] = [];
 
-    constructor(private configService: ConfigService) {
-    }
-  
+    constructor(private configService: ConfigService) { }
+
     port(): string {
-      return this.configService.get<string>('PORT');
+        return this.configService.get<string>('PORT');
     }
 
-
-    async createExport(transaction: ITransaction): Promise<void> {
+    async createExport(transaction: IExportResponse): Promise<void> {
         return null;
     }
-    
-    async export(transaction: ITransaction): Promise<void> {
+
+    async export(exportId: String): Promise<IExportResponse[]> {
         return null;
     }
 
@@ -51,6 +46,6 @@ export class TransactionsService implements ITransactionDao {
         return null;
     }
     async getOne(id: string): Promise<ITransaction> {
-       return null;
+        return null;
     }
 }

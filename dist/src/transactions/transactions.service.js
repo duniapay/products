@@ -24,7 +24,7 @@ let TransactionsService = class TransactionsService {
     async createExport(transaction) {
         return null;
     }
-    async export(transaction) {
+    async export(exportId) {
         return null;
     }
     async payout(transaction) {

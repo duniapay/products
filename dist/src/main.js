@@ -15,7 +15,6 @@ async function bootstrap() {
         dsn: process.env.SENTRY_DSN,
     });
     const configService = app.get(config_service_1.ConfigService);
-    app.enableCors();
     app.use(helmet());
     app.useGlobalPipes(new pipes_1.ValidationPipe());
     app.setGlobalPrefix('v1');

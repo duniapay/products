@@ -17,7 +17,6 @@ async function bootstrap() {
   });
   // get an environment variable
   const configService = app.get(ConfigService);
-  app.enableCors();
   app.use(helmet());
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('v1');

@@ -26,9 +26,12 @@ let UserController = class UserController {
         if (secret !== process.env.CUSTOMER_SECRET) {
         }
         else {
-            var client_secret = process.env.OAUTH_CLIENTSECRET;
-            var client_id = process.env.OAUTH_CLIENTID;
-            const token = await this.userService.auth({ client_id: client_id, client_secret: client_secret });
+            const client_secret = process.env.OAUTH_CLIENTSECRET;
+            const client_id = process.env.OAUTH_CLIENTID;
+            const token = await this.userService.auth({
+                client_id: client_id,
+                client_secret: client_secret,
+            });
         }
         return this.userService.getOne(secret);
     }
