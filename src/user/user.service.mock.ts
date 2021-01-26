@@ -1,3 +1,4 @@
+import AuthCredentials, { IAuthCredentials } from "src/core/credentials";
 import User, { IUser } from "./user.entity";
 import { IUserDao } from "./user.interfaces";
 
@@ -16,9 +17,10 @@ export class UserServiceMock implements IUserDao {
 
 
     
-    async auth(credentials: { client_id: string; client_secret: string; }): Promise<{}> {
+    async auth(credentials: { client_id: string; client_secret: string; }): Promise<IAuthCredentials> {
         if(credentials.client_id !== undefined && credentials.client_secret !== '') {
-            return Promise.resolve({'token': ''});
+            let _cred = new AuthCredentials('');
+            return Promise.resolve(_cred);
            } else {
             return Promise.reject({'message': 'invalid params'});
            }

@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import AuthCredentials, { IAuthCredentials } from 'src/core/credentials';
+import { IAuthCredentialsRequestDto } from 'src/core/credentials_request.dto';
 import { ITransaction } from 'src/transactions/transactions.entity';
 import { IUser } from './user.entity';
 import { IUserDao } from './user.interfaces';
+const {request} = require('gaxios');
 
 
 
@@ -26,12 +29,33 @@ export class UserService implements IUserDao {
         return null;
     }
 
-    // async getAll(): Promise<IUser> {
-    //     return null;
-    // }
+   
     
-    async auth(credentials: { client_id: string; client_secret: string; }): Promise<{}> {
-        return null;
+    async auth(credentials: IAuthCredentialsRequestDto, issuerDomain: String,): Promise<AuthCredentials> {
+       
+   
+      
+          let requestConfig = {
+            url:issuerDomain,
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(credentials)
+        };
+    
+    
+        
+       try {
+          const res = await request(requestConfig).then(function (response) {
+              var dk = new AuthCredentials(response.data.access_token, response.data.token_type,response.data.expires); 
+              return Promise.resolve(response.data)
+            }).catch(function (error) {
+              throw error;
+            });
+            return Promise.resolve(res)
+
+       } catch (error) {
+           return Promise.reject(error)
+       }
     }
 
     async add(user: IUser): Promise<void> {
@@ -50,3 +74,6 @@ export class UserService implements IUserDao {
         return this.configService.get<string>('PORT');
       }
 }
+
+
+

@@ -12,7 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const credentials_1 = require("../core/credentials");
+const credentials_request_dto_1 = require("../core/credentials_request.dto");
 const transactions_entity_1 = require("../transactions/transactions.entity");
+const { request } = require('gaxios');
 let UserService = class UserService {
     constructor(configService) {
         this.configService = configService;
@@ -21,8 +24,25 @@ let UserService = class UserService {
     async getOne(email) {
         return null;
     }
-    async auth(credentials) {
-        return null;
+    async auth(credentials, issuerDomain) {
+        let requestConfig = {
+            url: issuerDomain,
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(credentials)
+        };
+        try {
+            const res = await request(requestConfig).then(function (response) {
+                var dk = new credentials_1.default(response.data.access_token, response.data.token_type, response.data.expires);
+                return Promise.resolve(response.data);
+            }).catch(function (error) {
+                throw error;
+            });
+            return Promise.resolve(res);
+        }
+        catch (error) {
+            return Promise.reject(error);
+        }
     }
     async add(user) {
         return null;

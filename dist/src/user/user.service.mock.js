@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserServiceMock = void 0;
+const credentials_1 = require("../core/credentials");
 const user_entity_1 = require("./user.entity");
 class UserServiceMock {
     async getOne(email) {
@@ -14,7 +15,8 @@ class UserServiceMock {
     }
     async auth(credentials) {
         if (credentials.client_id !== undefined && credentials.client_secret !== '') {
-            return Promise.resolve({ 'token': '' });
+            let _cred = new credentials_1.default('');
+            return Promise.resolve(_cred);
         }
         else {
             return Promise.reject({ 'message': 'invalid params' });

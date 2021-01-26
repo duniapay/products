@@ -5,7 +5,7 @@ export declare class TransactionsController {
     private readonly transactionsService;
     constructor(transactionsService: TransactionsService);
     getOne(id: string): Promise<ITransaction>;
-    getAll(email: string): Promise<any>;
+    getAll(client: string): Promise<any>;
     add(body: ITransaction): Promise<void>;
     collect(body: ITransaction): Promise<void>;
     payout(body: ITransaction): Promise<void>;

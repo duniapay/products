@@ -22,30 +22,39 @@ let TransactionsService = class TransactionsService {
         return this.configService.get('PORT');
     }
     async createExport(transaction) {
+        console.log(transaction.data);
         return null;
     }
     async export(exportId) {
+        console.log(exportId);
         return null;
     }
     async payout(transaction) {
+        console.log(transaction.amount);
         return null;
     }
     async update(transaction) {
+        console.log(transaction.amount);
         return null;
     }
     async collect(transaction) {
+        console.log(transaction.amount);
         return null;
     }
     async deposit(transaction) {
+        console.log(transaction.amount);
         return null;
     }
     async add(transaction) {
+        console.log(transaction.amount);
         return null;
     }
     async getAll(email) {
+        console.log(email);
         return null;
     }
     async getOne(id) {
+        console.log(id);
         return null;
     }
 };

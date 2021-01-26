@@ -16,36 +16,48 @@ export class TransactionsService implements ITransactionDao {
     }
 
     async createExport(transaction: IExportResponse): Promise<void> {
+        console.log(transaction.data)
         return null;
     }
 
     async export(exportId: String): Promise<IExportResponse[]> {
+        console.log(exportId)
         return null;
     }
 
     async payout(transaction: ITransaction): Promise<void> {
+        console.log(transaction.amount)
         return null;
     }
     async update(transaction: ITransaction): Promise<void> {
+        console.log(transaction.amount)
+
         return null;
     }
 
     async collect(transaction: ITransaction): Promise<void> {
+        console.log(transaction.amount)
         return null;
     }
 
     async deposit(transaction: ITransaction): Promise<void> {
+        console.log(transaction.amount)
         return null;
     }
 
     async add(transaction: ITransaction): Promise<void> {
+        console.log(transaction.amount)
+
         return null;
     }
 
     async getAll(email: string): Promise<any> {
+        console.log(email)
+
         return null;
     }
     async getOne(id: string): Promise<ITransaction> {
+        console.log(id)
         return null;
     }
 }

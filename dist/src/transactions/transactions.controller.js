@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransactionsController = void 0;
 const common_1 = require("@nestjs/common");
 const common_2 = require("@nestjs/common");
-const passport_1 = require("@nestjs/passport");
 const sentry_interceptor_1 = require("../core/sentry.interceptor");
 const transactions_entity_1 = require("./transactions.entity");
 const transactions_service_1 = require("./transactions.service");
@@ -26,8 +25,8 @@ let TransactionsController = class TransactionsController {
     async getOne(id) {
         return this.transactionsService.getOne(id);
     }
-    async getAll(email) {
-        return this.transactionsService.getAll(email);
+    async getAll(client) {
+        return this.transactionsService.getAll(client);
     }
     async add(body) {
         this.transactionsService.add(body);
@@ -52,7 +51,6 @@ let TransactionsController = class TransactionsController {
     }
 };
 __decorate([
-    common_2.UseGuards(passport_1.AuthGuard('jwt')),
     common_2.Get(':id'),
     __param(0, common_2.Param('id')),
     __metadata("design:type", Function),
@@ -60,39 +58,34 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "getOne", null);
 __decorate([
-    common_2.UseGuards(passport_1.AuthGuard('jwt')),
-    common_2.Get(':email'),
-    __param(0, common_2.Param('email')),
+    common_2.Get(),
+    __param(0, common_1.Query('client')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "getAll", null);
 __decorate([
-    common_2.UseGuards(passport_1.AuthGuard('jwt')),
-    common_2.Post(),
+    common_2.Post('deposit'),
     __param(0, common_2.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "add", null);
 __decorate([
-    common_2.UseGuards(passport_1.AuthGuard('jwt')),
-    common_2.Post(),
+    common_2.Post('collect'),
     __param(0, common_2.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "collect", null);
 __decorate([
-    common_2.UseGuards(passport_1.AuthGuard('jwt')),
-    common_2.Post(),
+    common_2.Post('payout'),
     __param(0, common_2.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "payout", null);
 __decorate([
-    common_2.UseGuards(passport_1.AuthGuard('jwt')),
     common_2.Post(),
     __param(0, common_2.Body()),
     __metadata("design:type", Function),
@@ -100,7 +93,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "update", null);
 __decorate([
-    common_2.UseGuards(passport_1.AuthGuard('jwt')),
     common_2.Post('/exports'),
     __param(0, common_2.Body()),
     __metadata("design:type", Function),
@@ -108,7 +100,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "createExport", null);
 __decorate([
-    common_2.UseGuards(passport_1.AuthGuard('jwt')),
     common_2.Get('exports/:exportId'),
     __param(0, common_2.Param(':exportId')),
     __metadata("design:type", Function),
@@ -116,7 +107,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "export", null);
 __decorate([
-    common_2.UseGuards(passport_1.AuthGuard('jwt')),
     common_2.Post(),
     __param(0, common_2.Body()),
     __metadata("design:type", Function),
