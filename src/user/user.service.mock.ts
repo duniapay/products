@@ -26,25 +26,25 @@ export class UserServiceMock implements IUserDao {
            }
     }
 
-    async add(user: IUser): Promise<void> {
+    async add(user: IUser): Promise<IUser> {
         if(user !== undefined) {
-            return Promise.resolve();
+            return Promise.resolve(user);
            } else {
             return Promise.reject();
            }
     }
 
-    async update(user: IUser): Promise<void> {
+    async update(user: IUser): Promise<IUser> {
         if(user !== undefined) {
-            return Promise.resolve();
+            return Promise.resolve(user);
            } else {
             return Promise.reject();
            }
     }
 
-    async delete(id: number): Promise<void> {
+    async delete(id: number): Promise<boolean> {
         if(id !== undefined) {
-            return Promise.resolve();
+            return Promise.resolve(true);
            } else {
             return Promise.reject();
            }

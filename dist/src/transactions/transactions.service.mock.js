@@ -3,17 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransactionsServiceMock = void 0;
 const transactions_entity_1 = require("./transactions.entity");
 class TransactionsServiceMock {
-    async createExport(transaction) {
-        if (transaction !== undefined) {
-            return Promise.resolve();
+    async createExport(query) {
+        if (query !== undefined) {
+            return Promise.resolve(null);
         }
         else {
             return Promise.reject();
         }
     }
-    async export(transaction) {
-        if (transaction !== undefined) {
-            return Promise.resolve();
+    async export(id) {
+        if (id !== undefined) {
+            return Promise.resolve(null);
         }
         else {
             return Promise.reject();

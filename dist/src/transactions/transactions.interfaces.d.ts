@@ -1,3 +1,5 @@
+import { IExportResponse } from "./export.interfaces";
+import { IQuery } from "./query.interface";
 import Transaction from "./transactions.entity";
 export interface ITransactionDao {
     getOne: (id: string) => Promise<Transaction | null>;
@@ -7,4 +9,6 @@ export interface ITransactionDao {
     deposit: (transaction: Transaction) => Promise<void>;
     payout: (transaction: Transaction) => Promise<void>;
     update: (transaction: Transaction) => Promise<void>;
+    createExport: (query: IQuery) => Promise<string>;
+    export: (id: string) => Promise<IExportResponse[]>;
 }
