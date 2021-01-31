@@ -13,37 +13,123 @@ exports.TransactionsService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const transaction_dto_1 = require("../core/transaction.dto");
+const gaxios = require('gaxios');
 let TransactionsService = class TransactionsService {
     constructor(configService) {
         this.configService = configService;
-        this.cats = [];
+        gaxios.instance.defaults = {
+            baseURL: this.configService.get('BACKEND_TX_URL'),
+            headers: {
+                Authorization: this.configService.get('BACKEND_API')
+            }
+        };
+        this._end = this.configService.get('BACKEND_TX_URL');
+        this._customer = this.configService.get('CUSTOMER_EMAIL');
     }
     port() {
         return this.configService.get('PORT');
     }
-    async createExport(transaction) {
-        console.log(transaction.data);
-        return null;
+    async createExport(query) {
+        try {
+            const res = await gaxios.request({ url: '/exports/', method: 'GET', data: {
+                    query: {
+                        status: 'Complete',
+                    }
+                }
+            }).then(function (response) {
+                return Promise.resolve(response.data);
+            }).catch(function (error) {
+                return Promise.reject(error);
+            });
+            return Promise.resolve(res);
+        }
+        catch (error) {
+            return Promise.reject(error);
+        }
     }
     async export(exportId) {
-        console.log(exportId);
-        return null;
+        try {
+            const res = await gaxios.request({ url: '/data', method: 'POST', data: JSON.stringify({ some: 'data' }) }).then(function (response) {
+                return Promise.resolve(response.data);
+            }).catch(function (error) {
+                return Promise.reject(error);
+            });
+            return Promise.resolve(res);
+        }
+        catch (error) {
+            return Promise.reject(error);
+        }
     }
     async payout(transaction) {
-        console.log(transaction.amount);
-        return null;
+        try {
+            const res = await gaxios.request({ url: `/debit`, method: 'POST', data: JSON.stringify({ user: transaction.customerEmail, amount: transaction.amount, currency: transaction.currency, subtype: 'payout' }) }).then(function (response) {
+                return Promise.resolve(response.data);
+            }).catch(function (error) {
+                return Promise.reject(error);
+            });
+            return Promise.resolve(res);
+        }
+        catch (error) {
+            return Promise.reject(error);
+        }
     }
     async update(transaction) {
         console.log(transaction.amount);
         return null;
     }
     async collect(transaction) {
-        console.log(transaction.amount);
-        return null;
+        try {
+            const res = await gaxios.request({ url: this._end, method: 'POST', data: JSON.stringify({
+                    transactions: [
+                        { tx_type: "credit",
+                            user: this._customer,
+                            amount: transaction.amount,
+                            subtype: 'merchant_payment',
+                            currency: "XOF" },
+                        { tx_type: "debit",
+                            user: transaction.customerEmail,
+                            amount: transaction.amount,
+                            subtype: 'customer_deposit',
+                            currency: transaction.currency }
+                    ]
+                }) }).then(function (response) {
+                return Promise.resolve(response.data);
+            }).catch(function (error) {
+                return Promise.reject(error);
+            });
+            return Promise.resolve(res);
+        }
+        catch (error) {
+            return Promise.reject(error);
+        }
     }
     async deposit(transaction) {
-        console.log(transaction.amount);
-        return null;
+        try {
+            const res = await gaxios.request({ url: '/', method: 'POST', data: {
+                    transactions: [
+                        { tx_type: "credit",
+                            user: transaction.customerEmail,
+                            amount: transaction.amount,
+                            currency: transaction.currency,
+                            subtype: 'merchant_payment'
+                        },
+                        { tx_type: "debit",
+                            user: this._customer,
+                            amount: transaction.amount,
+                            currency: transaction.currency,
+                            subtype: 'customer_withdraw	'
+                        }
+                    ]
+                } }).then(function (response) {
+                return Promise.resolve(response.data);
+            }).catch(function (error) {
+                return Promise.reject(error);
+            });
+            return Promise.resolve(res);
+        }
+        catch (error) {
+            return Promise.reject(error);
+        }
     }
     async add(transaction) {
         console.log(transaction.amount);

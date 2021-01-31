@@ -22,95 +22,117 @@ let TransactionsController = class TransactionsController {
     constructor(transactionsService) {
         this.transactionsService = transactionsService;
     }
-    async getOne(id) {
+    async getOne(id, res) {
         return this.transactionsService.getOne(id);
     }
-    async getAll(client) {
+    async getAll(client, res) {
         return this.transactionsService.getAll(client);
     }
-    async add(body) {
-        this.transactionsService.add(body);
-    }
-    async collect(body) {
+    async collect(body, res) {
         this.transactionsService.collect(body);
     }
-    async payout(body) {
-        this.transactionsService.payout(body);
+    async payout(body, res) {
+        try {
+            let rest = await this.transactionsService.payout(body);
+            res.status(common_1.HttpStatus.OK).send(rest);
+        }
+        catch (error) {
+            console.log(error.response.data);
+            res.status(common_1.HttpStatus.BAD_REQUEST).send();
+        }
     }
-    async update(body) {
-        this.transactionsService.update(body);
+    async update(body, res) {
+        try {
+            let rest = await this.transactionsService.update(body);
+            res.status(common_1.HttpStatus.OK).send(rest);
+        }
+        catch (error) {
+            console.log(error.response.data);
+            res.status(common_1.HttpStatus.BAD_REQUEST).send();
+        }
     }
-    async createExport(body) {
-        this.transactionsService.createExport(body);
+    async createExport(body, res) {
+        try {
+            let rest = await this.transactionsService.createExport(body);
+            res.status(common_1.HttpStatus.OK).send(rest);
+        }
+        catch (error) {
+            res.status(common_1.HttpStatus.BAD_REQUEST).send();
+        }
     }
-    async export(exportId) {
-        this.transactionsService.export(exportId);
+    async export(exportId, res) {
+        try {
+            let rest = await this.transactionsService.export(exportId);
+            res.status(common_1.HttpStatus.OK).send(rest);
+        }
+        catch (error) {
+            res.status(common_1.HttpStatus.BAD_REQUEST).send();
+        }
     }
-    async deposit(body) {
-        this.transactionsService.deposit(body);
+    async deposit(body, res) {
+        try {
+            let rest = await this.transactionsService.deposit(body);
+            res.status(common_1.HttpStatus.OK).send(rest);
+        }
+        catch (error) {
+            res.status(common_1.HttpStatus.BAD_REQUEST).send(error.response.data);
+        }
     }
 };
 __decorate([
     common_2.Get(':id'),
-    __param(0, common_2.Param('id')),
+    __param(0, common_2.Param('id')), __param(1, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "getOne", null);
 __decorate([
     common_2.Get(),
-    __param(0, common_1.Query('client')),
+    __param(0, common_1.Query('client')), __param(1, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "getAll", null);
 __decorate([
-    common_2.Post('deposit'),
-    __param(0, common_2.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], TransactionsController.prototype, "add", null);
-__decorate([
     common_2.Post('collect'),
-    __param(0, common_2.Body()),
+    __param(0, common_2.Body()), __param(1, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "collect", null);
 __decorate([
     common_2.Post('payout'),
-    __param(0, common_2.Body()),
+    __param(0, common_2.Body()), __param(1, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "payout", null);
 __decorate([
     common_2.Post(),
-    __param(0, common_2.Body()),
+    __param(0, common_2.Body()), __param(1, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "update", null);
 __decorate([
     common_2.Post('/exports'),
-    __param(0, common_2.Body()),
+    __param(0, common_2.Body()), __param(1, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "createExport", null);
 __decorate([
     common_2.Get('exports/:exportId'),
-    __param(0, common_2.Param(':exportId')),
+    __param(0, common_2.Param(':exportId')), __param(1, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "export", null);
 __decorate([
-    common_2.Post(),
-    __param(0, common_2.Body()),
+    common_2.Post('deposit'),
+    __param(0, common_2.Body()), __param(1, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "deposit", null);
 TransactionsController = __decorate([

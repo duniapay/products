@@ -24,7 +24,7 @@ class UserServiceMock {
     }
     async add(user) {
         if (user !== undefined) {
-            return Promise.resolve();
+            return Promise.resolve(user);
         }
         else {
             return Promise.reject();
@@ -32,7 +32,7 @@ class UserServiceMock {
     }
     async update(user) {
         if (user !== undefined) {
-            return Promise.resolve();
+            return Promise.resolve(user);
         }
         else {
             return Promise.reject();
@@ -40,7 +40,7 @@ class UserServiceMock {
     }
     async delete(id) {
         if (id !== undefined) {
-            return Promise.resolve();
+            return Promise.resolve(true);
         }
         else {
             return Promise.reject();

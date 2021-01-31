@@ -8,7 +8,7 @@ export declare class UserServiceMock implements IUserDao {
         client_id: string;
         client_secret: string;
     }): Promise<IAuthCredentials>;
-    add(user: IUser): Promise<void>;
-    update(user: IUser): Promise<void>;
-    delete(id: number): Promise<void>;
+    add(user: IUser): Promise<IUser>;
+    update(user: IUser): Promise<IUser>;
+    delete(id: number): Promise<boolean>;
 }

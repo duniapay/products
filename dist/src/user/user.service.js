@@ -16,10 +16,17 @@ const credentials_1 = require("../core/credentials");
 const credentials_request_dto_1 = require("../core/credentials_request.dto");
 const transactions_entity_1 = require("../transactions/transactions.entity");
 const { request } = require('gaxios');
+const gaxios = require('gaxios');
 let UserService = class UserService {
     constructor(configService) {
         this.configService = configService;
         this.users = [];
+        gaxios.instance.defaults = {
+            baseURL: this.configService.get('BACKEND_USER_URL'),
+            headers: {
+                Authorization: JSON.stringify('Token ' + this.configService.get('BACKEND_API'))
+            }
+        };
     }
     async getOne(email) {
         return null;
