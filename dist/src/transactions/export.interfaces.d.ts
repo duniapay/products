@@ -1,34 +1,31 @@
 export interface IExportResponse {
-    status: string;
-    data: {
+    status?: string;
+    data?: {
         id: string;
-        type: string;
-        query: {};
+        section: string;
+        resource: string;
+        query: any;
         status: string;
         count: number;
         page_size: number;
         progress: number;
-        pages: {};
+        file_format: string;
         archived: boolean;
         created: boolean;
         updated: boolean;
+        user: any;
+        pages?: {};
+        type?: string;
     };
 }
-declare class ExportResponse implements IExportResponse {
-    status: string;
-    data: {
-        id: string;
-        type: string;
-        query: {};
-        status: string;
-        count: number;
-        page_size: number;
-        progress: number;
-        pages: {};
-        archived: boolean;
-        created: boolean;
-        updated: boolean;
-    };
-    constructor(query: {} | IExportResponse, type?: string, status?: string, count?: number, page_size?: number, progress?: number);
+export interface IExportRequest {
+    page_size: number;
+    section: string;
+    resource: string;
+    file_format: string;
+    query: IExportQuery;
 }
-export default ExportResponse;
+interface IExportQuery {
+    fields: string;
+}
+export {};

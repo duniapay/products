@@ -40,11 +40,13 @@ let TransactionsController = class TransactionsController {
     async update(body) {
         this.transactionsService.update(body);
     }
-    async createExport(body) {
-        this.transactionsService.createExport(body);
+    async createExport(body, res) {
+        const exports = await this.transactionsService.createExport(body);
+        return res.status(common_2.HttpStatus.ACCEPTED).json(exports);
     }
-    async export(exportId) {
-        this.transactionsService.export(exportId);
+    async export(exportId, res) {
+        const exports = await this.transactionsService.export(exportId);
+        return res.status(common_2.HttpStatus.ACCEPTED).json(exports);
     }
     async deposit(body) {
         this.transactionsService.deposit(body);
@@ -93,17 +95,17 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "update", null);
 __decorate([
-    common_2.Post('/exports'),
-    __param(0, common_2.Body()),
+    common_2.Post('exports'),
+    __param(0, common_2.Body()), __param(1, common_2.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "createExport", null);
 __decorate([
     common_2.Get('exports/:exportId'),
-    __param(0, common_2.Param(':exportId')),
+    __param(0, common_2.Param('exportId')), __param(1, common_2.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], TransactionsController.prototype, "export", null);
 __decorate([

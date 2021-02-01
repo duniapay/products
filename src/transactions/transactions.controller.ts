@@ -3,13 +3,13 @@
 
 
 import { Query, UseInterceptors } from '@nestjs/common';
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, Res, HttpStatus } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { SentryInterceptor } from 'src/core/sentry.interceptor';
 import { ITransaction } from 'src/transactions/transactions.entity';
-import { IExportResponse } from './export.interfaces';
+import { IExportResponse, IExportRequest } from './export.interfaces';
 import { TransactionsService } from './transactions.service';
-
+import { Response } from 'express';
 
 
 @UseInterceptors(SentryInterceptor)
@@ -58,16 +58,18 @@ export class TransactionsController {
 
   /// Admin create transaction exports request
   // @UseGuards(AuthGuard('jwt'))
-  @Post('/exports')
-  async createExport(@Body() body: IExportResponse): Promise<void> {
-    this.transactionsService.createExport(body);
+  @Post('exports')
+  async createExport(@Body() body: IExportRequest, @Res() res: Response) {
+    const exports = await this.transactionsService.createExport(body);
+    return res.status(HttpStatus.ACCEPTED).json(exports)
   }
 
   /// Admin Retrieve a transaction export.
   // @UseGuards(AuthGuard('jwt'))
   @Get('exports/:exportId')
-  async export(@Param(':exportId') exportId: string): Promise<void> {
-    this.transactionsService.export(exportId);
+  async export(@Param('exportId') exportId: string, @Res() res: Response) {
+    const exports = await this.transactionsService.export(exportId);
+    return res.status(HttpStatus.ACCEPTED).json(exports)
   }
   
 

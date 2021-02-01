@@ -13,6 +13,7 @@ exports.TransactionsService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const transaction_dto_1 = require("../core/transaction.dto");
+const gaxios_1 = require("gaxios");
 let TransactionsService = class TransactionsService {
     constructor(configService) {
         this.configService = configService;
@@ -22,12 +23,26 @@ let TransactionsService = class TransactionsService {
         return this.configService.get('PORT');
     }
     async createExport(transaction) {
-        console.log(transaction.data);
-        return null;
+        const { data } = await gaxios_1.request({
+            url: process.env.REHIVE_URL + '/3/admin/exports',
+            headers: {
+                Authorization: `Token ${process.env.REHIVE_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            data: transaction,
+            method: 'POST'
+        });
+        return data;
     }
     async export(exportId) {
-        console.log(exportId);
-        return null;
+        const { data } = await gaxios_1.request({
+            url: process.env.REHIVE_URL + '/3/admin/exports/' + exportId,
+            headers: {
+                Authorization: `Token ${process.env.REHIVE_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+        });
+        return data;
     }
     async payout(transaction) {
         console.log(transaction.amount);

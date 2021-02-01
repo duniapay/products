@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TransactionDTO } from 'src/core/transaction.dto';
-import { IExportResponse } from './export.interfaces';
+import { IExportResponse, IExportRequest } from './export.interfaces';
 import { ITransaction } from './transactions.entity';
 import { ITransactionDao } from './transactions.interfaces';
+import { request } from 'gaxios'
 
 @Injectable()
 export class TransactionsService implements ITransactionDao {
@@ -15,14 +16,30 @@ export class TransactionsService implements ITransactionDao {
         return this.configService.get<string>('PORT');
     }
 
-    async createExport(transaction: IExportResponse): Promise<void> {
-        console.log(transaction.data)
-        return null;
+    async createExport(transaction: IExportRequest): Promise<IExportResponse> {
+        const { data } = await request({
+            url: process.env.REHIVE_URL + '/3/admin/exports',
+            headers: {
+                Authorization: `Token ${process.env.REHIVE_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            data: transaction,
+            method: 'POST'
+        })
+
+        return data
     }
 
-    async export(exportId: String): Promise<IExportResponse[]> {
-        console.log(exportId)
-        return null;
+    async export(exportId: string): Promise<IExportResponse> {
+        const { data } = await request({
+            url: process.env.REHIVE_URL + '/3/admin/exports/' + exportId,
+            headers: {
+                Authorization: `Token ${process.env.REHIVE_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
+        return data
     }
 
     async payout(transaction: ITransaction): Promise<void> {
