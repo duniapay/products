@@ -12,6 +12,7 @@ import { TransactionsService } from './transactions.service';
 import { Response } from 'express';
 
 
+
 @UseInterceptors(SentryInterceptor)
 @Controller('transactions')
 export class TransactionsController {
@@ -21,38 +22,45 @@ export class TransactionsController {
 
   // @UseGuards(AuthGuard('jwt'))
   @Get(':id')
-  async getOne(@Param('id') id: string): Promise<ITransaction> {
+  async getOne(@Param('id') id: string,@Res() res: Response): Promise<ITransaction> {
     return this.transactionsService.getOne(id);
   }
 
   // @UseGuards(AuthGuard('jwt'))
   @Get()
-  async getAll(@Query('client') client: string): Promise<any> {
+  async getAll(@Query('client') client: string,@Res() res: Response): Promise<any> {
     return this.transactionsService.getAll(client);
   }
 
-  // @UseGuards(AuthGuard('jwt'))
-  @Post('deposit')
-  async add(@Body() body: ITransaction): Promise<void> {
-    this.transactionsService.add(body);
-  }
 
   // @UseGuards(AuthGuard('jwt'))
   @Post('collect')
-  async collect(@Body() body: ITransaction): Promise<void> {
+  async collect(@Body() body: ITransaction,@Res() res: Response): Promise<void> {
     this.transactionsService.collect(body);
   }
 
   // @UseGuards(AuthGuard('jwt'))
   @Post('payout')
-  async payout(@Body() body: ITransaction): Promise<void> {
-    this.transactionsService.payout(body);
+  async payout(@Body() body: ITransaction,@Res() res: Response): Promise<void> {
+    try {
+      let rest = await this.transactionsService.payout(body);
+      res.status(HttpStatus.OK).send(rest);
+     } catch (error) {
+       console.log(error.response.data)
+       res.status(HttpStatus.BAD_REQUEST).send();
+     }
   }
 
   // @UseGuards(AuthGuard('jwt'))
   @Post()
-  async update(@Body() body: ITransaction): Promise<void> {
-    this.transactionsService.update(body);
+  async update(@Body() body: ITransaction,@Res() res: Response): Promise<void> {
+    try {
+      let rest = await this.transactionsService.update(body);
+      res.status(HttpStatus.OK).send(rest);
+     } catch (error) {
+       console.log(error.response.data)
+       res.status(HttpStatus.BAD_REQUEST).send();
+     }
   }
 
 
@@ -62,6 +70,7 @@ export class TransactionsController {
   async createExport(@Body() body: IExportRequest, @Res() res: Response) {
     const exports = await this.transactionsService.createExport(body);
     return res.status(HttpStatus.ACCEPTED).json(exports)
+
   }
 
   /// Admin Retrieve a transaction export.
@@ -74,9 +83,15 @@ export class TransactionsController {
   
 
   // @UseGuards(AuthGuard('jwt'))
-  @Post()
-  async deposit(@Body() body: ITransaction): Promise<void> {
-    this.transactionsService.deposit(body);
+  @Post('deposit')
+  async deposit(@Body() body: ITransaction,@Res() res: Response): Promise<void> {
+
+    try {
+      let rest = await this.transactionsService.deposit(body);
+      res.status(HttpStatus.OK).send(rest);
+     } catch (error) {
+       res.status(HttpStatus.BAD_REQUEST).send(error.response.data);
+     }
   }
 
 

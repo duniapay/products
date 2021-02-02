@@ -1,19 +1,21 @@
+import { IExportResponse } from "./export.interfaces";
+import { IQuery } from "./query.interface";
 import Transaction, { ITransaction } from "./transactions.entity";
 import { ITransactionDao } from "./transactions.interfaces";
 
 export class TransactionsServiceMock implements ITransactionDao {
 
-   async createExport(transaction: Transaction): Promise<void> {
-    if(transaction !== undefined) {
-      return Promise.resolve();
+   async createExport(query: IQuery): Promise<string> {
+    if(query !== undefined) {
+      return Promise.resolve(null);
      } else {
       return Promise.reject();
      }
   }
   
-  async export(transaction: Transaction): Promise<void> {
-    if(transaction !== undefined) {
-      return Promise.resolve();
+  async export(id: string): Promise<IExportResponse[]> {
+    if(id !== undefined) {
+      return Promise.resolve(null);
      } else {
       return Promise.reject();
      }

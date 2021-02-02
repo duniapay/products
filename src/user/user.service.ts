@@ -6,6 +6,7 @@ import { ITransaction } from 'src/transactions/transactions.entity';
 import { IUser } from './user.entity';
 import { IUserDao } from './user.interfaces';
 const {request} = require('gaxios');
+const gaxios = require('gaxios');
 
 
 
@@ -19,6 +20,12 @@ export class UserService implements IUserDao {
     private readonly users: IUser[] = [];
 
     constructor(private configService: ConfigService) {
+        gaxios.instance.defaults = {
+            baseURL: this.configService.get<string>('BACKEND_USER_URL') ,
+            headers: {
+              Authorization:  JSON.stringify('Token '+  this.configService.get<string>('BACKEND_API'))
+            }
+          }
     }
     
     getAll: () => Promise<IUser[]>;
@@ -31,9 +38,7 @@ export class UserService implements IUserDao {
 
    
     
-    async auth(credentials: IAuthCredentialsRequestDto, issuerDomain: String,): Promise<AuthCredentials> {
-       
-   
+    async auth(credentials: IAuthCredentialsRequestDto, issuerDomain: String,): Promise<IAuthCredentials> {
       
           let requestConfig = {
             url:issuerDomain,
@@ -58,15 +63,15 @@ export class UserService implements IUserDao {
        }
     }
 
-    async add(user: IUser): Promise<void> {
+    async add(user: IUser): Promise<IUser> {
         return null;
     }
 
-    async update(user: IUser): Promise<void> {
+    async update(user: IUser): Promise<IUser> {
         return null;
     }
 
-    async delete(id: number): Promise<void> {
+    async delete(id: number): Promise<boolean> {
         return null;
     }
 
