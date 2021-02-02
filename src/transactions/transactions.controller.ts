@@ -2,16 +2,15 @@
 
 
 
-import { HttpStatus, Query, Res, UseInterceptors } from '@nestjs/common';
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Query, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, Res, HttpStatus } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { SentryInterceptor } from 'src/core/sentry.interceptor';
 import { ITransaction } from 'src/transactions/transactions.entity';
-import { IExportResponse } from './export.interfaces';
+import { IExportResponse, IExportRequest } from './export.interfaces';
 import { TransactionsService } from './transactions.service';
-
 import { Response } from 'express';
-import { IQuery } from './query.interface';
+
 
 
 @UseInterceptors(SentryInterceptor)
@@ -67,27 +66,19 @@ export class TransactionsController {
 
   /// Admin create transaction exports request
   // @UseGuards(AuthGuard('jwt'))
-  @Post('/exports',)
-  async createExport(@Body() body: IQuery,@Res() res: Response): Promise<void> {
-    try {
-      let rest = await this.transactionsService.createExport(body);
-      res.status(HttpStatus.OK).send(rest);
-     } catch (error) {
-       res.status(HttpStatus.BAD_REQUEST).send();
-     }
+  @Post('exports')
+  async createExport(@Body() body: IExportRequest, @Res() res: Response) {
+    const exports = await this.transactionsService.createExport(body);
+    return res.status(HttpStatus.ACCEPTED).json(exports)
+
   }
 
   /// Admin Retrieve a transaction export.
   // @UseGuards(AuthGuard('jwt'))
   @Get('exports/:exportId')
-  async export(@Param(':exportId') exportId: string,@Res() res: Response): Promise<void> {
-    
-    try {
-      let rest = await this.transactionsService.export(exportId);
-      res.status(HttpStatus.OK).send(rest);
-     } catch (error) {
-       res.status(HttpStatus.BAD_REQUEST).send();
-     }
+  async export(@Param('exportId') exportId: string, @Res() res: Response) {
+    const exports = await this.transactionsService.export(exportId);
+    return res.status(HttpStatus.ACCEPTED).json(exports)
   }
   
 

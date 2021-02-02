@@ -1,12 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TransactionDTO } from 'src/core/transaction.dto';
+<<<<<<< HEAD
+import { IExportResponse, IExportRequest } from './export.interfaces';
+import { ITransaction } from './transactions.entity';
+import { ITransactionDao } from './transactions.interfaces';
+import { request } from 'gaxios'
+=======
 import { ThisMonthInstance } from 'twilio/lib/rest/api/v2010/account/usage/record/thisMonth';
 import { IExportResponse } from './export.interfaces';
 import { IQuery } from './query.interface';
 import { ITransaction } from './transactions.entity';
 import { ITransactionDao } from './transactions.interfaces';
 const gaxios = require('gaxios');
+>>>>>>> master
 
 @Injectable()
 export class TransactionsService implements ITransactionDao {
@@ -27,6 +34,32 @@ export class TransactionsService implements ITransactionDao {
         return this.configService.get<string>('PORT');
     }
 
+<<<<<<< HEAD
+    async createExport(transaction: IExportRequest): Promise<IExportResponse> {
+        const { data } = await request({
+            url: process.env.REHIVE_URL + '/3/admin/exports',
+            headers: {
+                Authorization: `Token ${process.env.REHIVE_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            data: transaction,
+            method: 'POST'
+        })
+
+        return data
+    }
+
+    async export(exportId: string): Promise<IExportResponse> {
+        const { data } = await request({
+            url: process.env.REHIVE_URL + '/3/admin/exports/' + exportId,
+            headers: {
+                Authorization: `Token ${process.env.REHIVE_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
+        return data
+=======
 
     /// Create a transaction export.
 
@@ -61,6 +94,7 @@ export class TransactionsService implements ITransactionDao {
            } catch (error) {
                return Promise.reject(error)
            }
+>>>>>>> master
     }
 
     async payout(transaction: ITransaction): Promise<void> {
